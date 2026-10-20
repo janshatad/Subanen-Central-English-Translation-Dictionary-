@@ -1,0 +1,13 @@
+[versions]
+core = "1.19.1"
+glide = "5.0.9"
+googleServices = "4.5.0"
+gradle = "9.4.1"
+gson = "2.14.0"
+
+[libraries]
+androidx-core = { group = "androidx.core", name = "core", version.ref = "core" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServices" }
+gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "gradle" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }

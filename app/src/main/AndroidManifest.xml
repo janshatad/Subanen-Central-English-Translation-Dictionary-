@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='utf-8'?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+   >
+
+    <!--have full network access-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!--control vibration-->
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <!--view network connections-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <!--read the contents of your shared storage-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
+
+    <!--modify or delete the contents of your shared storage-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
+
+    <!-- Android 13 to Android 17 media permissions -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED"/>
+
+    <!--ask to ignore battery optimizations-->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+
+    <!--run at startup-->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+
+    <queries>
+        <intent>
+            <action android:name="android.settings.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+            <data android:scheme="package" />
+        </intent>
+        <package android:name="com.android.settings" />
+    </queries>
+  
+        <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+
+
+    <application
+        android:allowBackup="true"
+        android:label="Subanen Central English Dictionary"
+        android:icon="@drawable/app_icon"
+        android:largeHeap="true"
+        android:usesCleartextTraffic="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:hardwareAccelerated="true"
+            android:supportsPictureInPicture="true"
+            android:theme="@style/NoActionBar"/>
+
+        <activity
+            android:name=".FullwordActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:hardwareAccelerated="true"
+            android:supportsPictureInPicture="true"
+            android:theme="@style/NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <activity
+            android:name=".DaywordActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:hardwareAccelerated="true"
+            android:supportsPictureInPicture="true"
+            android:theme="@style/NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <activity
+            android:name=".GcashActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:hardwareAccelerated="true"
+            android:supportsPictureInPicture="true"
+            android:theme="@style/FullScreen"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <activity
+            android:exported="true"
+            android:name=".SplashScreenActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:hardwareAccelerated="true"
+            android:supportsPictureInPicture="true"
+            android:theme="@style/FullScreen"
+            android:windowSoftInputMode="stateHidden">
+
+            <intent-filter>
+
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".HistoryActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:hardwareAccelerated="true"
+            android:supportsPictureInPicture="true"
+            android:theme="@style/NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <activity
+            android:name=".HistoryMainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:hardwareAccelerated="true"
+            android:supportsPictureInPicture="true"
+            android:theme="@style/NoActionBar"/>
+
+        <activity
+            android:name=".BookmarkedActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:hardwareAccelerated="true"
+            android:supportsPictureInPicture="true"
+            android:theme="@style/NoActionBar"/>
+
+        <activity
+            android:name=".ViewSavedDataActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:hardwareAccelerated="true"
+            android:supportsPictureInPicture="true"
+            android:theme="@style/NoActionBar"/>
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false"/>
+
+        <receiver android:name=".AlarmReceiver"/>
+        <receiver android:name=".AlarmBootReceiver" android:exported="true">
+            
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>
+      
+        
+
+        <service android:name=".BackgroundProvider"/>
+
+
+
+    </application>
+
+</manifest>

@@ -1,0 +1,325 @@
+package com.bon.subanen.dictionary;
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Service;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
+import android.os.IBinder;
+import androidx.core.app.NotificationCompat;
+import com.bon.subanen.dictionary.NotificationPublisher;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Timer;
+
+public class BackgroundProvider extends Service{
+
+    public static int ALARM_TYPE_RTC = 100;
+    private static AlarmManager alarmManagerRTC;
+    private static PendingIntent alarmIntentRTC;
+    private static Timer timer = new Timer(); 
+    private static Timer timer2 = new Timer(); 
+    private static BackgroundProvider instance;
+    private SharedPreferences database;
+    private String allText = "";
+    private double random = 0;
+    private String    word_of_day ="";
+    private ArrayList<HashMap<String, Object>> searchmap = new ArrayList<>();
+    
+    private Context mContext;
+    
+    
+    public Context context = this;
+    
+    @Override
+    public void onCreate() {
+        
+        mContext = getApplicationContext();
+        instance=this;
+        
+        try {
+
+            java.io.InputStream stream = getAssets().open("directory1.txt");
+
+
+            java.io.BufferedReader bfr = new java.io.BufferedReader(new java.io.InputStreamReader(stream));
+
+            String nextline = "";
+            //String allText ="";
+
+            while ( (nextline = bfr.readLine()) != null) {
+                allText = allText + nextline + "\n";
+            }
+
+            //textview1.setText(allText);
+
+            searchmap = new Gson().fromJson(allText, new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+
+        } catch (java.io.IOException e){
+
+            //showMessage(e.toString());
+
+        }
+        
+        
+        
+        database = getSharedPreferences("files", Activity.MODE_PRIVATE);
+        
+        
+        
+         
+         
+        //   NotificationHelper.enableBootReceiver(mContext);
+         
+        // NotificationHelper.scheduleRepeatingRTCNotification(mContext);
+        
+     //   setnotif();
+        
+        
+        super.onCreate();
+    }
+    
+    public static BackgroundProvider getInstance()
+    {
+        return instance;
+    }
+    
+    private void setnotif() {
+         long  num1= 0;
+         long num2= 1;
+        
+        boolean isEnabled = true;
+    //    if (isEnabled) {
+            
+         //   NotificationHelper.enableBootReceiver(mContext);
+    //    } else {
+       //     NotificationHelper.cancelAlarmRTC();
+           // NotificationHelper.disableBootReceiver(mContext);
+   //     }
+    }
+        
+        
+        
+    
+        
+        
+        
+    
+    
+    
+    
+    
+    
+    
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+    
+    /*
+    private class mainTask extends TimerTask
+    { 
+        public void run() 
+        {
+        startService(new Intent(getApplicationContext(), Notification_receiver.class));
+            //toastHandler.sendEmptyMessage(0);
+          //  timer.scheduleAtFixedRate (new mainTask(), 0, 10000);
+    
+        
+        }            
+    }    
+    
+ */
+    public void onStart(Intent intent, int i) {
+    }
+    
+    
+    public void scheduleNotification1day(String hour, String min ) {
+        /*
+        //   final int meto = 0;
+        Calendar cal = Calendar.getInstance();
+        // add 5 minutes to the calendar object
+        cal.setTimeInMillis(System.currentTimeMillis());
+        cal.add(Calendar.MINUTE, 1);
+      //  cal.add(Calendar.SECOND, 0);
+          long triggerAt = cal.getTimeInMillis();
+           long repeatAfter = 60 * 1000;
+        Intent notificationIntent = new Intent(this, NotificationPublisher.class);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 0);
+      //  notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notifications);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+      //   long futureInMillis = SystemClock.elapsedRealtime() + meto;
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+      //   alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+     //  alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),AlarmManager.ELAPSED_REALTIME, pendingIntent);
+
+     //   alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,  triggerAt, repeatAfter, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,triggerAt,repeatAfter, pendingIntent);
+        
+       */ 
+
+        
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour));
+calendar.set(Calendar.MINUTE, Integer.parseInt(min));
+calendar.set(Calendar.SECOND, 0);
+calendar.set(Calendar.MILLISECOND, 0);
+        //Setting intent to class where Alarm broadcast message will be handled
+        Intent intent = new Intent(context, NotificationPublisher.class);
+         intent.putExtra(NotificationPublisher.NOTIFICATION_ID,1);
+         intent.putExtra(NotificationPublisher.NOTIFICATION,notification1());
+        //Setting alarm pending intent
+        alarmIntentRTC = PendingIntent.getBroadcast(context, ALARM_TYPE_RTC, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        //getting instance of AlarmManager service
+        alarmManagerRTC = (AlarmManager)context.getSystemService(ALARM_SERVICE);
+
+        //Setting alarm to wake up device every day for clock time.
+        //AlarmManager.RTC_WAKEUP is responsible to wake up device for sure, which may not be good practice all the time.
+        // Use this when you know what you're doing.
+        //Use RTC when you don't need to wake up device, but want to deliver the notification whenever device is woke-up
+        //We'll be using RTC.WAKEUP for demo purpose only
+        alarmManagerRTC.setInexactRepeating(AlarmManager.RTC_WAKEUP,
+                                            calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntentRTC);
+    
+ 
+
+
+    }
+    
+    
+    
+    public Notification notification1 () {
+        
+
+        // timer.scheduleAtFixedRate (new mainTask(), 0, 1000);
+        //   Toast.makeText(this, "This is GetNotification" + 1, Toast.LENGTH_LONG).show();
+        int notifyId = 005;
+        searchmap = new Gson().fromJson(allText, new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+   if (searchmap == null || searchmap.isEmpty()) {
+    NotificationCompat.Builder builder =
+        new NotificationCompat.Builder(context, "0");
+
+    builder.setSmallIcon(android.R.drawable.ic_popup_reminder);
+    builder.setContentTitle("Word Notification");
+    builder.setContentText("Open the app to view the word of the day.");
+
+    return builder.build();
+}
+
+random = SketchwareUtil.getRandom(
+    0, searchmap.size() - 1);
+
+        word_of_day = searchmap.get((int)random).get("word").toString().concat("\n".concat(searchmap.get((int)random).get("synonym").toString()));
+
+        database.edit().putString("daywordview", searchmap.get((int)random).get("word").toString()).commit();
+        database.edit().putString("daysynonymview", searchmap.get((int)random).get("synonym").toString()).commit();
+        database.edit().putString("notifyword", word_of_day).commit();
+
+
+
+
+
+
+        androidx.core.app.NotificationCompat.BigTextStyle bpStyle = new androidx.core.app.NotificationCompat.BigTextStyle(); 
+
+
+        Intent notificationIntents = new Intent(getApplicationContext(), DaywordActivity.class); 
+        PendingIntent pendingIntentnotification = PendingIntent.getActivity(BackgroundProvider.this, 0, notificationIntents, PendingIntent.FLAG_IMMUTABLE); 
+        word_of_day = database.getString("notifyword", "");
+
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+
+        androidx.core.app.NotificationCompat.Builder mBuilder = new androidx.core.app.NotificationCompat.Builder(BackgroundProvider.this) 
+
+
+            .setSmallIcon(R.drawable.app_icon) 
+            .setContentTitle("Word of the Day") 
+            .setContentText(word_of_day)
+            //.setOngoing(true)
+            .setStyle(bpStyle)
+
+            .setDefaults(Notification.DEFAULT_ALL)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)   // heads-up
+            .setSound(alarmSound)
+
+            .setAutoCancel(true);
+
+        mBuilder.setContentIntent(pendingIntentnotification); 
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE); 
+
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { 
+            String channelId2 = "2"; 
+            String channelName2 = "Notification Service"; 
+
+            NotificationChannel channel = new NotificationChannel(channelId2, channelName2, NotificationManager.IMPORTANCE_HIGH); 
+
+            channel.enableLights(true); 
+            channel.setLightColor(Color.RED); 
+            channel.setShowBadge(true); 
+            channel.enableVibration(true); 
+
+            mBuilder.setChannelId(channelId2); 
+
+            if (notificationManager != null) { 
+                notificationManager.createNotificationChannel(channel); 
+            } 
+        }  else { 
+            mBuilder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE); 
+        } 
+
+        if (notificationManager != null) { 
+            notificationManager.notify(notifyId, mBuilder.build()); 
+        }
+
+        else {
+
+        }
+
+        return  mBuilder.build();
+
+        
+    }
+
+    public void setRepeating (int type, long triggerAtMillis, long intervalMillis, PendingIntent operation){
+
+    }
+
+ /*
+    public  Notification getNotification ( ){
+        
+        
+        
+        
+        // startService(new Intent(getApplicationContext(), Notification_receiver.class));
+
+      
+    
+       
+        
+     
+        return mBuilder.build();
+      
+    }
+
+
+*/
+    
+    
+    
+    
+}

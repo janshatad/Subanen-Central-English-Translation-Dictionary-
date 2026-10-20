@@ -1,0 +1,21 @@
+{
+  "allFiles": [
+    {
+      "file": "/storage/emulated/0/Download/SubanenDictionary lite released (1)/SubanenDictionary lite released/build.gradle",
+      "selection": {
+        "end": {
+          "column": 11,
+          "index": 460,
+          "line": 17
+        },
+        "start": {
+          "column": 2,
+          "index": 451,
+          "line": 17
+        }
+      }
+    }
+  ],
+  "projectPath": "/storage/emulated/0/Download/SubanenDictionary lite released (1)/SubanenDictionary lite released",
+  "selectedFile": "/storage/emulated/0/Download/SubanenDictionary lite released (1)/SubanenDictionary lite released/build.gradle"
+}

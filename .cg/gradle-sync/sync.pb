@@ -1,0 +1,8 @@
+
+2`/storage/emulated/0/Download/SubanenDictionary lite released (1)/SubanenDictionary lite released1792454498336"Î
+settings.gradlep/storage/emulated/0/Download/SubanenDictionary lite released (1)/SubanenDictionary lite released/settings.gradle ¸ÆÊ¡•4*@59c6d9993f443ba72c69964b622fae8d9fe9ad9f86df3af8dd3fd5fc17b06ab6"Ñ
+app/build.gradleq/storage/emulated/0/Download/SubanenDictionary lite released (1)/SubanenDictionary lite released/app/build.gradleü ÐÄö¡•4*@8d19dae65f66ee295fa5c5cc0b98853a9c6a534a5f85b4ebe63f45c6924308e6"É
+build.gradlem/storage/emulated/0/Download/SubanenDictionary lite released (1)/SubanenDictionary lite released/build.gradle¯ ÈÄö¡•4*@8aa1207918f61acd3854eed796c5b7c2660f8172937b6498f6f1357ec66144a2"‚
+(gradle/wrapper/gradle-wrapper.properties‰/storage/emulated/0/Download/SubanenDictionary lite released (1)/SubanenDictionary lite released/gradle/wrapper/gradle-wrapper.propertiesý ˆô•¢•4*@64e088eb1871853234a003aec6b8c18fda0a5f3abedabee38d1641aabe94fd39"Ó
+gradle.propertiesr/storage/emulated/0/Download/SubanenDictionary lite released (1)/SubanenDictionary lite released/gradle.properties¦ ¸é¦¤•4*@59f91bbf87c513e7ada498065d59afa059736836f2b587669fb959d823372e92*¿
+{/storage/emulated/0/Download/SubanenDictionary lite released (1)/SubanenDictionary lite released/.cg/gradle-sync/project.pb@4a5aa32c90bff0d90a2d35bbb0b6f272cedce2041e65e88a7b56769148059ca6

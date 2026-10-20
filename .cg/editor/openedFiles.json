@@ -1,0 +1,51 @@
+{
+  "allFiles": [
+    {
+      "file": "/storage/emulated/0/Download/SubanenDictionary lite released (1)/SubanenDictionary lite released/app/src/main/AndroidManifest.xml",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 5398,
+          "line": 136
+        },
+        "start": {
+          "column": 0,
+          "index": 5398,
+          "line": 136
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/Download/SubanenDictionary lite released (1)/SubanenDictionary lite released/app/src/main/java/com/bon/subanen/dictionary/MainActivity.java",
+      "selection": {
+        "end": {
+          "column": 12,
+          "index": 7680,
+          "line": 231
+        },
+        "start": {
+          "column": 12,
+          "index": 7680,
+          "line": 231
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/Download/SubanenDictionary lite released (1)/SubanenDictionary lite released/app/src/main/java/com/bon/subanen/dictionary/AlarmReceiver.java",
+      "selection": {
+        "end": {
+          "column": 12,
+          "index": 6612,
+          "line": 185
+        },
+        "start": {
+          "column": 12,
+          "index": 6612,
+          "line": 185
+        }
+      }
+    }
+  ],
+  "projectPath": "/storage/emulated/0/Download/SubanenDictionary lite released (1)/SubanenDictionary lite released",
+  "selectedFile": "/storage/emulated/0/Download/SubanenDictionary lite released (1)/SubanenDictionary lite released/app/src/main/java/com/bon/subanen/dictionary/AlarmReceiver.java"
+}
